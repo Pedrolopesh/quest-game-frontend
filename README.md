@@ -1,4 +1,4 @@
-# forntend-quest
+# quizzz app
 
 ## Project setup
 ```

@@ -32,3 +32,34 @@
         width: 60px !important;
     }
 }
+
+.cup-title{
+    display: block;
+    justify-content: center;
+    text-align: center;
+    padding: 5px;
+    border-radius: 0px 20px 0px 20px;
+}
+
+.container-cup-podiums{
+    justify-content: space-between;
+
+
+    @media screen and (max-width: 700px){
+        flex-direction: column !important;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+.cup-title-theme-1{
+    background-image: linear-gradient(to right, #e6b70b, #bb8a2d);
+}
+
+.cup-title-theme-2{
+    background-image: linear-gradient(to right, #8c8c8c, #3e3e3e);
+}
+
+.cup-title-theme-3{
+    background-image: linear-gradient(to right, #e65c0b, #bd8417);
+}

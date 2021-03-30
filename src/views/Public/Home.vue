@@ -4,7 +4,60 @@
       <img src="../../assets/img/logo-type.png" alt="logo" class="logo">
   </div>
 
-   <div>
+    <v-card v-if="podiumItems" class="p20 ac" max-width="800">
+      <div class="d-flex container-cup-podiums">
+
+        <div class="alg-txt-c mt-10 mb-10">
+          <img src="../../assets/img/cup_2.png" alt="Winner 1">
+          <div class="alg-txt-c">
+            <v-chip color="orange" outlined class="mb-2" v-if="podiumItems[1].playerScore">{{ podiumItems[1].playerScore }} Pontos</v-chip>
+
+            <span class="cup-title cup-title-theme-2">
+              <h3 class="mb-0" v-if="podiumItems[1].playerNickname">{{ podiumItems[1].playerNickname }}</h3>
+            </span>
+          </div>
+        </div>
+
+        <div class="alg-txt-c mt-10 mb-10">
+          <img src="../../assets/img/cup_1.png" alt="Winner 1">
+          <div class="alg-txt-c">
+            <v-chip color="orange" outlined class="mb-2" v-if="podiumItems[0].playerScore">{{ podiumItems[0].playerScore }} Pontos</v-chip>
+
+            <span class="cup-title cup-title-theme-1">
+              <h3 class="mb-0" v-if="podiumItems[0].playerNickname">{{ podiumItems[0].playerNickname }}</h3>
+            </span>
+          </div>
+        </div>
+
+        <div class="alg-txt-c mt-10 mb-10">
+          <img src="../../assets/img/cup_3.png" alt="Winner 1">
+          <div class="alg-txt-c">
+            <v-chip color="orange" outlined class="mb-2" v-if="podiumItems[2].playerScore">{{ podiumItems[2].playerScore }} Pontos</v-chip>
+
+            <span class="cup-title cup-title-theme-3">
+              <h3 class="mb-0" v-if="podiumItems[2].playerNickname">{{ podiumItems[2].playerNickname }}</h3>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div align="center">
+        <v-btn class="mt-5 mb-5" color="purple" @click="redirectHome()">JOGAR</v-btn>
+      </div>
+    </v-card>
+
+    <v-card v-else class="ac p20" max-width="700">
+      <h1 class="alg-txt-c"> Bem vindo ao Quizzz</h1>
+      <InfoPlayRulesDialog/>
+     
+      <div align="center">
+        <v-btn class="mt-5 mb-5" color="purple" @click="redirectHome()">JOGAR</v-btn>
+      </div>
+    </v-card>
+
+   <!--<div>
       <div class="conteiner-master">
         <div class="conteiner" v-for="(item, index) in podiumItems" :key="index">
           <div class="container-cups">
@@ -22,17 +75,18 @@
           </div>
         </div>
       </div>
-    </div>
-    
-    <div align="center">
-      <v-btn class="mt-5 mb-5" color="purple" @click="redirectHome()">JOGAR</v-btn>
-    </div>
+    </div> -->
+  
 
   </div>
 </template>
 <script>
+import InfoPlayRulesDialog from '../../components/InfoPlayRulesDialog';
 
 export default {
+  components:{
+    InfoPlayRulesDialog
+  },
   //data é o espaço que contem todas as variaveis globais
   data: () => ({
     itens:[
