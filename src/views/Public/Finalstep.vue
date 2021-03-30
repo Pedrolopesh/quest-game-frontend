@@ -13,7 +13,8 @@
         </div>
 
         <div class="mb-10">
-            <h2 class="alg-txt-c">pontuação total: <v-chip>{{ toatalPoints }}</v-chip></h2>
+            <h2 class="alg-txt-c">pontuação do jogo atual: <v-chip>{{ toatalPoints }}</v-chip></h2>
+            <h2 class="alg-txt-c mt-9" v-if="playerTotalScore !== ''">Pontuação total: <v-chip color="orange" outlined>{{ playerTotalScore }}</v-chip></h2>
         </div>
 
         <div align="center">
@@ -32,7 +33,9 @@ export default {
         svgs,
         currentPlayer: JSON.parse(localStorage.getItem('player')),
         toatalPoints: JSON.parse(localStorage.getItem('totalPoints')),
-        podiumItems:''
+        podiumItems:'',
+
+        playerTotalScore:'',
     }),
     created(){
         this.getPodium()
@@ -42,11 +45,24 @@ export default {
             const podium = await this.$http.get(this.$url + '/podium')
             if(!podium.data || podium.status !== 200) console.log(podium)
             this.podiumItems = podium.data.message
+            this.getPlayerPoints()
         },
 
         redirectAndCleanGame(){
-            localStorage.clear();
+            // localStorage.clear();
+            localStorage.removeItem('selectedMatter');
+            localStorage.removeItem('stepQuestionForm');
+            localStorage.removeItem('answeredForm1');
+            localStorage.removeItem('answeredForm2');
+            localStorage.removeItem('answeredForm3');
             this.$router.push('/Home')
+        },
+
+        async getPlayerPoints(){
+            const playerId = this.currentPlayer.player._id
+            const player = await this.$http.get(this.$url + `/player/${playerId}`).catch(err => { return err }) 
+            if(!player) this.playerTotalScore = ''
+            this.playerTotalScore = player.data.player.totalScore
         }
     }
 }

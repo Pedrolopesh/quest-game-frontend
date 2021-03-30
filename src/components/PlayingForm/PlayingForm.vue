@@ -9,18 +9,16 @@
                 <span class="clr-success">Parabéns, você acertou </span>
                 <v-chip outlined color="success" class="ml-2"> + {{ questions[index].points }}</v-chip>  
             </span>
-            
+
             <div class="d-flex" v-for="(alternativeItens,i) in questionItem.alternatives" :key="i">
             
             <v-checkbox
                 @click="select(questionItem, alternativeItens, index)"
                 :label="alternativeItens.option+` ) `+ alternativeItens.text"
                 :disabled="selectedPlayerAnswer[index] === index ? true : false"
-                :class="
-                    (alternativeItens.option === questionItem.correctAlternative) &&
-                    (playerOptionAnswsered[index] === questionItem.correctAlternative) ? 'sucess-text' : ''"
+                :class="{'sucess-text': (alternativeItens.option === questionItem.correctAlternative) && (playerOptionAnswsered[index] === questionItem.correctAlternative), 
+                    'wrong-text': (playerOptionAnswsered[index] !== questionItem.correctAlternative) && playerOptionAnswsered[index] }"
             ></v-checkbox>
-                <!-- :class="playerOptionAnswsered[index] === questionItem.correctAlternative ? 'sucess-text' : ''" -->
 
             </div>
         </div>

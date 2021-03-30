@@ -52,25 +52,35 @@ export default {
     nickname:'',
     email:'',
     dialogStateProps:false,
+    SavedPlayer: JSON.parse(localStorage.getItem('player'))
   }),
 
+  created(){
+    this.setInputs();
+  },
+
   methods:{
-    registerPlayer(){
+    async registerPlayer(){
 
       let body = {
         nickname:this.nickname,
         email:this.email
       }
 
-      this.$http.post(this.$url + '/player/create', body).then(resp => {
-        if(!resp.data || resp.status != 201){
-          this.$vs.notification({ duration: 9000, progress: 'auto', color:'danger', title: 'Erro ao cadastrar player',})
-        }else{
-          localStorage.setItem('player', JSON.stringify(resp.data));
+      const player = await this.$http.post(this.$url + '/player/create', body)
+
+        if(!player.data || player.status != 201){
+          this.$vs.notification({ duration: 9000, progress: 'auto', color:'success', title: 'Seu usuário foi encontrado, seja bem vindo de volta!',})
+          localStorage.setItem('player', JSON.stringify(player.data));
+          this.$router.push('/SelectSubject')
+        }
+        else{
+          localStorage.setItem('player', JSON.stringify(player.data));
           this.$vs.notification({ duration: 9000, progress: 'auto', color:'success', title: 'Sucesso ao cadastrar, Bem vindo Jogador: ' + resp.data.nickname,})
           this.$router.push('/SelectSubject')
         }
-      })
+        
+    
     },
 
     showInfoDialog(){
@@ -79,6 +89,13 @@ export default {
 
     changeDialogStateProps(){
       this.dialogStateProps = false;
+    },
+
+    setInputs(){
+      if(this.SavedPlayer){
+        this.nickname = this.SavedPlayer.player.nickname
+        this.email = this.SavedPlayer.player.email
+      }
     }
   }
 }
