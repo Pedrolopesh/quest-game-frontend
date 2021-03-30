@@ -4,13 +4,23 @@
     <div v-for="(questionItem,index) in questions" :key="index">
         <div class="container-form ac mt-15">
             <h3>{{ questionItem.description }}</h3>
+            
+            <span v-if="playerOptionAnswsered[index] === questionItem.correctAlternative"> 
+                <span class="clr-success">Parabéns, você acertou </span>
+                <v-chip outlined color="success" class="ml-2"> + {{ questions[index].points }}</v-chip>  
+            </span>
+            
             <div class="d-flex" v-for="(alternativeItens,i) in questionItem.alternatives" :key="i">
-
+            
             <v-checkbox
                 @click="select(questionItem, alternativeItens, index)"
                 :label="alternativeItens.option+` ) `+ alternativeItens.text"
                 :disabled="selectedPlayerAnswer[index] === index ? true : false"
+                :class="
+                    (alternativeItens.option === questionItem.correctAlternative) &&
+                    (playerOptionAnswsered[index] === questionItem.correctAlternative) ? 'sucess-text' : ''"
             ></v-checkbox>
+                <!-- :class="playerOptionAnswsered[index] === questionItem.correctAlternative ? 'sucess-text' : ''" -->
 
             </div>
         </div>
@@ -29,11 +39,12 @@ export default {
     data:() => ({
         localPlayer: JSON.parse(localStorage.getItem('player')),
         selectMatter: JSON.parse(localStorage.getItem('selectedMatter')),
-        selectedPlayerAnswer:[],
         questions:'',
         disabledCheckBox: false,
         selectQuest:[],
-        currentStep:1
+        currentStep:1,
+        selectedPlayerAnswer:[],
+        playerOptionAnswsered:[],
     }),
     created(){
         this.getAndSetStep()
@@ -64,6 +75,7 @@ export default {
 
             this.selectQuest.push(previewAnswer)
             this.selectedPlayerAnswer.push(index)
+            this.playerOptionAnswsered.push(selectedAnswer.option)
     
         },
 
@@ -100,6 +112,10 @@ export default {
             this.$vs.notification({ duration: 9000, progress: 'auto', color:'success', title: 'Parabéns, o jogo acabou', position:'top-center'})
             this.$router.push('/FinalStep')
         }
+      },
+
+      async setStatusOption(){
+          
       }
     }
 }

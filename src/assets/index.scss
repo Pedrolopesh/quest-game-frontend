@@ -77,14 +77,14 @@ h4{
 }
 
 .clr-red{
-    color: #F44336;
+    color: #F44336 !important;
 }
 
 .clr-primary{
     color: #1976d2;
 }
 
-.clr-sucess{
+.clr-success{
     color: #4caf50 !important;
 }
 
@@ -163,4 +163,17 @@ h4{
 .dialog-toolbar{
     max-width: 100%;
     width: 100%;
+}
+
+
+.wrong-text{
+    label, div{
+        color: #F44336 !important;
+    }
+}
+
+.sucess-text{
+    label, div{
+        color: #4caf50 !important;
+    }
 }
