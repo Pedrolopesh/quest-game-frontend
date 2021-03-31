@@ -4,11 +4,13 @@
       <img src="../../assets/img/logo-type.png" alt="logo" class="logo">
   </div>
 
-    <v-card v-if="podiumItems" class="p20 ac" max-width="800">
-      <div class="d-flex container-cup-podiums">
+    <v-card class="p20 ac" max-width="800">
+      <h1 class="alg-txt-c"> Bem vindo ao Quizzz</h1>
+      <div v-if="podiumItems" class="d-flex container-cup-podiums">
 
         <div class="alg-txt-c mt-10 mb-10">
-          <img src="../../assets/img/cup_2.png" alt="Winner 1">
+          <h2> 2ª Lugar </h2>
+          <img class="home-img-size" src="../../assets/img/cup_2.png" alt="Winner 1">
           <div class="alg-txt-c">
             <v-chip color="orange" outlined class="mb-2" v-if="podiumItems[1].playerScore">{{ podiumItems[1].playerScore }} Pontos</v-chip>
 
@@ -19,7 +21,8 @@
         </div>
 
         <div class="alg-txt-c mt-10 mb-10">
-          <img src="../../assets/img/cup_1.png" alt="Winner 1">
+          <h2> 1ª Lugar </h2>
+          <img class="home-img-size" src="../../assets/img/cup_1.png" alt="Winner 1">
           <div class="alg-txt-c">
             <v-chip color="orange" outlined class="mb-2" v-if="podiumItems[0].playerScore">{{ podiumItems[0].playerScore }} Pontos</v-chip>
 
@@ -30,7 +33,8 @@
         </div>
 
         <div class="alg-txt-c mt-10 mb-10">
-          <img src="../../assets/img/cup_3.png" alt="Winner 1">
+          <h2> 3ª Lugar </h2>
+          <img class="home-img-size" src="../../assets/img/cup_3.png" alt="Winner 1">
           <div class="alg-txt-c">
             <v-chip color="orange" outlined class="mb-2" v-if="podiumItems[2].playerScore">{{ podiumItems[2].playerScore }} Pontos</v-chip>
 
@@ -44,17 +48,11 @@
 
 
       <div align="center">
-        <v-btn class="mt-5 mb-5" color="purple" @click="redirectHome()">JOGAR</v-btn>
+        <v-btn class="mt-5" color="orange" outlined @click="redirectHome()">JOGAR</v-btn>
       </div>
-    </v-card>
+        <InfoPlayRulesDialog/>
 
-    <v-card v-else class="ac p20" max-width="700">
-      <h1 class="alg-txt-c"> Bem vindo ao Quizzz</h1>
-      <InfoPlayRulesDialog/>
-     
-      <div align="center">
-        <v-btn class="mt-5 mb-5" color="purple" @click="redirectHome()">JOGAR</v-btn>
-      </div>
+
     </v-card>
 
    <!--<div>
@@ -223,7 +221,12 @@ export default {
   margin-left: auto;
   margin-right: auto;
   max-width: 100%;
-  width: 10%;
+  width: 8%;
+}
+
+.home-img-size{
+  max-width: 100%;
+  width: 70%;
 }
 </style>
 

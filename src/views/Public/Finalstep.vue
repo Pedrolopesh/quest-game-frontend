@@ -1,41 +1,85 @@
 <template>
     <div class="d-block mt-15">
-        
+
+
+        <v-card class="p20 ac" max-width="800">
+        <div align="end" class="mt-5">
+            <v-btn color="orange" outlined @click="dialog = true">PLACAR DE LIDERES</v-btn>
+        </div>
         <div>
-            <h1 class="alg-txt-c">Parabéns <span class="clr-red">{{ currentPlayer.player.nickname }}</span>, Missão cumprida com sucesso</h1>
+            <h1 class="alg-txt-c mt-2">Parabéns <span class="clr-red">{{ currentPlayer.player.nickname }}</span>, Missão cumprida!</h1>
         </div>
 
-        <PodiumCups :podiumItems="podiumItems"/>
-
-        <div class="container-podium mt-10 mb-5">
-            <span class="cup-size" v-html="svgs.cup_1"></span>
-            <v-chip outlined color="orange">{{ currentPlayer.player.nickname }}</v-chip>
+        <div v-if="positionPodium !== 0">
+            <h2 class="alg-txt-c mt-5">{{ positionPodium }}ª Lugar no ranking de lideres</h2>
+            <div class="container-podium mt-1 mb-5">
+                <img v-if="positionPodium !== 0" class="medal-size" :src="'./medal_' + positionPodium + '.png'" alt="">
+                <v-chip outlined color="orange">{{ currentPlayer.player.nickname }}</v-chip>
+            </div>
         </div>
-
-        <div class="mb-10">
+        
+        <div class="mb-10 mt-5">
             <h2 class="alg-txt-c">pontuação do jogo atual: <v-chip>{{ toatalPoints }}</v-chip></h2>
-            <h2 class="alg-txt-c mt-9" v-if="playerTotalScore !== ''">Pontuação total: <v-chip color="orange" outlined>{{ playerTotalScore }}</v-chip></h2>
+            <h2 class="alg-txt-c mt-3" v-if="playerTotalScore !== ''">Pontuação total: <v-chip color="orange" outlined>{{ playerTotalScore }}</v-chip></h2>
         </div>
 
         <div align="center">
-            <v-btn color="purple" @click="redirectAndCleanGame">Retornar</v-btn>
+            <v-btn color="orange" outlined @click="redirectAndCleanGame">Retornar</v-btn>
         </div>
+
+        
+
+        </v-card>
+    
+    
+    <v-dialog v-model="showView" max-width="1000">
+        <v-card class="card-modal">
+
+            <v-toolbar dark color="orange" class="dialog-toolbar">
+                <v-toolbar-title>🎉✨ VOCÊ GANHOU! 🎉✨</v-toolbar-title>
+                <v-spacer/>
+                    <v-btn icon dark @click="showView = false">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
+            </v-toolbar>
+
+            <GiftPromo />
+
+          </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="dialog" max-width="600">
+        <v-card class="card-modal">
+
+            <v-toolbar dark color="orange" class="dialog-toolbar">
+                <v-toolbar-title>Informações gerais</v-toolbar-title>
+                <v-spacer/>
+                    <v-btn icon dark @click="dialog = false">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
+            </v-toolbar>
+                <PodiumCups :podiumItems="podiumItems"/>
+          </v-card>
+    </v-dialog>
 
     </div>
 </template>
 <script>
 import svgs from '../../assets/svgs';
 import PodiumCups from '../../components/PodiumCups/PodiumCups';
+import GiftPromo from '../../components/GiftPromo';
 
 export default {
-    components:{PodiumCups},
+    components:{PodiumCups, GiftPromo},
     data:() => ({
         svgs,
         currentPlayer: JSON.parse(localStorage.getItem('player')),
         toatalPoints: JSON.parse(localStorage.getItem('totalPoints')),
         podiumItems:'',
-
+        positionPodium: 1,
         playerTotalScore:'',
+        dialog: false,
+        showView: false,
     }),
     created(){
         this.getPodium()
@@ -63,11 +107,34 @@ export default {
             const player = await this.$http.get(this.$url + `/player/${playerId}`).catch(err => { return err }) 
             if(!player) this.playerTotalScore = ''
             this.playerTotalScore = player.data.player.totalScore
+            this.getPlayerPodium(player.data.player)
+        },
+
+        async getPlayerPodium(playerData){
+            const playerPodium = await this.podiumItems.find((item) => { return item.playerNickname  === playerData.nickname})
+            if(!playerPodium || playerPodium.length === '') this.positionPodium = 0
+            console.log(playerPodium) 
+
+            // console.log(this.podiumItems[0].playerNickname) 
+            if(this.podiumItems[0].playerNickname === playerPodium.playerNickname) this.positionPodium = 1
+            if(this.podiumItems[1].playerNickname === playerPodium.playerNickname) this.positionPodium = 2
+            if(this.podiumItems[2].playerNickname === playerPodium.playerNickname) this.positionPodium = 3
+
+            this.checkPromo()
+        },
+
+        async checkPromo(){
+            if(this.positionPodium === 1) this.showView = true
         }
     }
 }
 </script>    
 <style lang="scss">
+
+.medal-size{
+    max-width: 100%;
+    width: 2%;
+}
 
 .gameover{
     display: block;

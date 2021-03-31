@@ -3,11 +3,11 @@
       <AppBar />
 
       <div align="center" class="mt-3">
-        <v-btn dark color="purple" @click="dialogQuestions = true">Criar Máteria</v-btn>
+        <v-btn dark color="orange" @click="dialogQuestions = true">Criar Máteria</v-btn>
       </div>
        
       <div align="center" class="mt-3">
-        <v-btn dark color="purple" @click="dialogCollectionQuest = true">Criar perGuntas para materia</v-btn>
+        <v-btn dark color="orange" @click="dialogCollectionQuest = true">Criar perGuntas para materia</v-btn>
       </div>
 
 
@@ -20,7 +20,7 @@
             <v-expansion-panel-content v-for="(item,i) in itens" :key="i">
 
               <div align="center" class="mt-1">
-                <v-btn :to="item.path" color="purple" dark class="mt-1">
+                <v-btn :to="item.path" color="orange" dark class="mt-1">
                   <v-icon class="mr-1">{{item.icon}}</v-icon>
                   {{item.title}}
                 </v-btn>
@@ -35,7 +35,7 @@
         <v-dialog v-model="dialogQuestions" max-width="600">
           <v-card class="card-modal">
 
-                <v-toolbar dark color="purple" class="dialog-toolbar">
+                <v-toolbar dark color="orange" class="dialog-toolbar">
                     <v-toolbar-title>Cadastrar Matéria</v-toolbar-title>
                     <v-spacer/>
                     <v-btn icon dark @click="dialogQuestions = false">
@@ -51,7 +51,7 @@
         <v-dialog v-model="dialogCollectionQuest" max-width="600">
           <v-card class="card-modal">
 
-                <v-toolbar dark color="purple" class="dialog-toolbar">
+                <v-toolbar dark color="orange" class="dialog-toolbar">
                     <v-toolbar-title> Cadastrar Questões de uma máteria </v-toolbar-title>
                     <v-spacer/>
                     <v-btn icon dark @click="dialogCollectionQuest = false">

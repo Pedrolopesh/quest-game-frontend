@@ -6,7 +6,7 @@
 
                 <div>
                     <v-select
-                        color="purple"
+                        color="orange"
                         v-model="selectedMatter"
                         :items="matters"
                         item-value="_id" item-text="title"
@@ -25,7 +25,7 @@
 
                     <v-select
                         class="mt-7"
-                        color="purple"
+                        color="orange"
                         v-model="correctAlternative"
                         :items="alternatives"
                         label="Qual a alternativa correta?"
@@ -47,7 +47,7 @@
 
                     <v-select
                         class="mt-7"
-                        color="purple"
+                        color="orange"
                         v-model="questionLevel"
                         :items="leves"
                         label="Nivel de dificuldade da questão"
@@ -69,7 +69,7 @@
 
 
             <div align="center">
-                <v-btn dark color="purple" @click="registerQuest()">Cadastrar</v-btn>
+                <v-btn dark color="orange" outlined @click="registerQuest()">Cadastrar</v-btn>
             </div>
 
             </div>

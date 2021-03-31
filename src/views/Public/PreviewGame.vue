@@ -24,7 +24,7 @@
 
           
           <div align="center">
-              <v-btn :disabled="!nickname || !email" dark color="purple" @click="registerPlayer()">Jogar</v-btn>
+              <v-btn :disabled="!nickname || !email" dark color="orange" outlined @click="registerPlayer()">Jogar</v-btn>
           </div>
 
           <InfoPlayRulesDialog />

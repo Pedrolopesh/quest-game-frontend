@@ -14,8 +14,8 @@
         </div>
 
         <div align="center">
-          <v-btn v-if="currentStep !== 3" dark color="purple" class="mb-10 mt-10" @click="nextStep()">Proxima Fase</v-btn>
-          <v-btn v-else dark color="purple" class="mb-10 mt-10" @click="finishGame()">Finalizar Jogo</v-btn>
+          <v-btn v-if="currentStep !== 3" dark color="orange" class="mb-10 mt-10" @click="nextStep()">Proxima Fase</v-btn>
+          <v-btn v-else dark color="orange" class="mb-10 mt-10" @click="finishGame()">Finalizar Jogo</v-btn>
         </div>
 
         <v-dialog v-model="dialogConfirmAnswer" max-width="600">

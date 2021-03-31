@@ -9,7 +9,7 @@
 
       <div v-for="(item,i) in matters" :key="i">
           <div align="center" class="mt-1">
-            <v-btn @click="selectMatter(item)" color="purple" dark class="mt-1">
+            <v-btn @click="selectMatter(item)" color="orange" outlined dark class="mt-1">
               {{item.title}}
             </v-btn>
           </div>

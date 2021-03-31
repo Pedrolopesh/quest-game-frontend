@@ -8,7 +8,7 @@
         <v-dialog v-model="dialog" max-width="600">
           <v-card class="card-modal">
 
-                <v-toolbar dark color="purple" class="dialog-toolbar">
+                <v-toolbar dark color="orange" class="dialog-toolbar">
                     <v-toolbar-title>Informações gerais</v-toolbar-title>
                     <v-spacer/>
                     <v-btn icon dark @click="dialog = false">
@@ -19,7 +19,7 @@
 
                 <div class="container-info p20">
                     <h1 class="mb-2 mt-5">Objetivo Geral do Quizzz</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum blanditiis nulla voluptatibus cumque illo porro, sequi tempore voluptate, non, voluptatum ducimus deserunt assumenda illum. Totam, voluptate! Ipsa rem nobis soluta!</p>
+                    <p>O objetivo do jogo é adquirir pontos através do seu conhecimento das perguntas, com esses pontos será possível trocar em descontos para algumas plataformas digitais como netflix, spotify e Disney +</p>
                 
                     <h1 class="mb-2 mt-15">Pontuações</h1>
                     <div>
@@ -68,6 +68,13 @@
                             <li> Devido ao aplicativo ser um protótipo de simulador, destinado a alunos que estão na reta final do Ensino Médio para a fase pré vestibular, seria de interesse do mesmo para buscar conhecimento. </li>
                         </ul>
                     </div>
+
+
+                    
+                    <div align="center">
+                        <v-btn class="mt-5" color="orange" outlined @click="dialog = false">JOGAR</v-btn>
+                    </div>
+
                 </div>
 
           </v-card>

@@ -9,7 +9,7 @@
         ></v-text-field>
 
         <div align="center">
-            <v-btn dark color="purple" @click="registerQuest()">Cadastrar</v-btn>
+            <v-btn dark color="orange" outlined @click="registerQuest()">Cadastrar</v-btn>
         </div>
     </v-form>
 
