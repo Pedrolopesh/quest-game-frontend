@@ -8,41 +8,7 @@
       <h1 class="alg-txt-c"> Bem vindo ao Quizzz</h1>
       <div v-if="podiumItems" class="d-flex container-cup-podiums">
 
-        <div class="alg-txt-c mt-10 mb-10">
-          <h2> 2ª Lugar </h2>
-          <img class="home-img-size" src="../../assets/img/cup_2.png" alt="Winner 1">
-          <div class="alg-txt-c">
-            <v-chip color="orange" outlined class="mb-2" v-if="podiumItems[1].playerScore">{{ podiumItems[1].playerScore }} Pontos</v-chip>
-
-            <span class="cup-title cup-title-theme-2">
-              <h3 class="mb-0" v-if="podiumItems[1].playerNickname">{{ podiumItems[1].playerNickname }}</h3>
-            </span>
-          </div>
-        </div>
-
-        <div class="alg-txt-c mt-10 mb-10">
-          <h2> 1ª Lugar </h2>
-          <img class="home-img-size" src="../../assets/img/cup_1.png" alt="Winner 1">
-          <div class="alg-txt-c">
-            <v-chip color="orange" outlined class="mb-2" v-if="podiumItems[0].playerScore">{{ podiumItems[0].playerScore }} Pontos</v-chip>
-
-            <span class="cup-title cup-title-theme-1">
-              <h3 class="mb-0" v-if="podiumItems[0].playerNickname">{{ podiumItems[0].playerNickname }}</h3>
-            </span>
-          </div>
-        </div>
-
-        <div class="alg-txt-c mt-10 mb-10">
-          <h2> 3ª Lugar </h2>
-          <img class="home-img-size" src="../../assets/img/cup_3.png" alt="Winner 1">
-          <div class="alg-txt-c">
-            <v-chip color="orange" outlined class="mb-2" v-if="podiumItems[2].playerScore">{{ podiumItems[2].playerScore }} Pontos</v-chip>
-
-            <span class="cup-title cup-title-theme-3">
-              <h3 class="mb-0" v-if="podiumItems[2].playerNickname">{{ podiumItems[2].playerNickname }}</h3>
-            </span>
-          </div>
-        </div>
+        <PodiumComponent podiumItems=""/>
 
       </div>
 
@@ -55,35 +21,17 @@
 
     </v-card>
 
-   <!--<div>
-      <div class="conteiner-master">
-        <div class="conteiner" v-for="(item, index) in podiumItems" :key="index">
-          <div class="container-cups">
-            
-            <h1 class="title">{{ item.playerNickname }}</h1>
-            
-            <div class="container-image-cup">
-              <img v-if="index === 0" :src="image1" alt="ranking 2" class="cup-image" />
-              <img v-if="index === 1" :src="image2" alt="ranking 2" class="cup-image" />
-              <img v-if="index === 2" :src="image3" alt="ranking 2" class="cup-image" />
-            </div>
-            
-            <h2 class="score d-flex" :class="'cup-'+ (index + 1)"> Score: <span>{{ item.playerScore }}</span> </h2>
-         
-          </div>
-        </div>
-      </div>
-    </div> -->
-  
 
   </div>
 </template>
 <script>
 import InfoPlayRulesDialog from '../../components/InfoPlayRulesDialog';
+import PodiumComponent from '../../components/PodiumCups/PodiumCups.vue'
 
 export default {
   components:{
-    InfoPlayRulesDialog
+    InfoPlayRulesDialog,
+    PodiumComponent
   },
   //data é o espaço que contem todas as variaveis globais
   data: () => ({
