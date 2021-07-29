@@ -17,7 +17,7 @@
                 <v-chip outlined color="orange">{{ currentPlayer.player.nickname }}</v-chip>
             </div>
         </div>
-        
+
         <div class="mb-10 mt-5">
             <h2 class="alg-txt-c">pontuação do jogo atual: <v-chip>{{ toatalPoints }}</v-chip></h2>
             <h2 class="alg-txt-c mt-3" v-if="playerTotalScore !== ''">Pontuação total: <v-chip color="orange" outlined>{{ playerTotalScore }}</v-chip></h2>
@@ -27,26 +27,7 @@
             <v-btn color="orange" outlined @click="redirectAndCleanGame">Retornar</v-btn>
         </div>
 
-        
-
         </v-card>
-    
-    
-    <v-dialog v-model="showView" max-width="1000">
-        <v-card class="card-modal">
-
-            <v-toolbar dark color="orange" class="dialog-toolbar">
-                <v-toolbar-title>🎉✨ VOCÊ GANHOU! 🎉✨</v-toolbar-title>
-                <v-spacer/>
-                    <v-btn icon dark @click="showView = false">
-                        <v-icon>mdi-close</v-icon>
-                    </v-btn>
-            </v-toolbar>
-
-            <GiftPromo />
-
-          </v-card>
-    </v-dialog>
 
     <v-dialog v-model="dialog" max-width="600">
         <v-card class="card-modal">
@@ -58,7 +39,7 @@
                         <v-icon>mdi-close</v-icon>
                     </v-btn>
             </v-toolbar>
-                <PodiumCups :podiumItems="podiumItems"/>
+                <PodiumCups />
           </v-card>
     </v-dialog>
 
@@ -67,19 +48,16 @@
 <script>
 import svgs from '../../assets/svgs';
 import PodiumCups from '../../components/PodiumCups/PodiumCups';
-import GiftPromo from '../../components/GiftPromo';
 
 export default {
-    components:{PodiumCups, GiftPromo},
+    components:{PodiumCups},
     data:() => ({
         svgs,
         currentPlayer: JSON.parse(localStorage.getItem('player')),
         toatalPoints: JSON.parse(localStorage.getItem('totalPoints')),
-        podiumItems:'',
         positionPodium: 1,
         playerTotalScore:'',
         dialog: false,
-        showView: false,
     }),
     created(){
         this.getPodium()
@@ -93,7 +71,6 @@ export default {
         },
 
         redirectAndCleanGame(){
-            // localStorage.clear();
             localStorage.removeItem('selectedMatter');
             localStorage.removeItem('stepQuestionForm');
             localStorage.removeItem('answeredForm1');
@@ -104,7 +81,7 @@ export default {
 
         async getPlayerPoints(){
             const playerId = this.currentPlayer.player._id
-            const player = await this.$http.get(this.$url + `/player/${playerId}`).catch(err => { return err }) 
+            const player = await this.$http.get(this.$url + `/player/${playerId}`).catch(err => { return err })
             if(!player) this.playerTotalScore = ''
             this.playerTotalScore = player.data.player.totalScore
             this.getPlayerPodium(player.data.player)
@@ -113,22 +90,17 @@ export default {
         async getPlayerPodium(playerData){
             const playerPodium = await this.podiumItems.find((item) => { return item.playerNickname  === playerData.nickname})
             if(!playerPodium || playerPodium.length === '') this.positionPodium = 0
-            console.log(playerPodium) 
+            console.log(playerPodium)
 
-            // console.log(this.podiumItems[0].playerNickname) 
+            // console.log(this.podiumItems[0].playerNickname)
             if(this.podiumItems[0].playerNickname === playerPodium.playerNickname) this.positionPodium = 1
             if(this.podiumItems[1].playerNickname === playerPodium.playerNickname) this.positionPodium = 2
             if(this.podiumItems[2].playerNickname === playerPodium.playerNickname) this.positionPodium = 3
-
-            this.checkPromo()
         },
 
-        async checkPromo(){
-            if(this.positionPodium === 1) this.showView = true
-        }
     }
 }
-</script>    
+</script>
 <style lang="scss">
 
 .medal-size{

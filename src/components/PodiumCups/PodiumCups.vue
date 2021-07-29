@@ -1,8 +1,7 @@
 <template>
-  <div>
-
-    <v-card class="p20 ac" max-width="800">
-      <div v-if="podiumItems" class="d-flex container-cup-podiums">
+  <div class="ac">
+    <v-card class="p20">
+      <div v-if="podiumItems" class="d-flex container-cup-podiums ac">
 
         <div class="alg-txt-c mt-2 mb-5">
           <h2> 2ª Lugar </h2>
@@ -42,16 +41,41 @@
 
       </div>
     </v-card>
-    
+
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import svg from '../../assets/svgs'
 export default {
-    props:['podiumItems'],
+    // props:['podiumItems'],
     data:() => ({
-        svg
-    })
+        svg,
+        podiumItems:''
+    }),
+
+    computed:{
+      ...mapGetters({
+        podiumItens: 'podiumItens'
+      })
+    },
+
+    methods:{
+      ...mapActions({
+        getPodium: 'getPodium'
+      })
+    },
+
+    created(){
+        console.log('I ALA foi ?', this.podiumItens)
+        this.getPodium()
+    },
+    watch: {
+      podiumItens(){
+        console.log("FOI FOI FOI FOI FOI", this.podiumItens )
+        this.podiumItems = this.podiumItens
+      }
+    }
 }
 </script>
 

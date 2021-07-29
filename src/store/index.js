@@ -13,7 +13,7 @@ export default new Vuex.Store({
     podiumItens: state => state.podiumItens,
   },
   mutations: {
-    setPodiumItens(state, data){
+    setPodiumItems(state, data){
       state.podiumItens = data
     },
   },
@@ -21,8 +21,9 @@ export default new Vuex.Store({
     async getPodium(context){
       console.log('vuex methods called')
       const podium = await axios.get(process.env.VUE_APP_PROD_URL + '/podium')
-      console.log(podium)
-      // context.setPodiumItens(podium)
+      if(podium.data.success && podium.data !== undefined){
+        context.commit('setPodiumItems', podium.data.message)
+      }
     }
   },
   modules: {

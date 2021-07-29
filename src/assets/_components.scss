@@ -43,12 +43,15 @@
 
 .container-cup-podiums{
     justify-content: space-between;
+    max-width: 100%;
+    width: 500px;
 
 
     @media screen and (max-width: 700px){
         flex-direction: column !important;
         justify-content: center;
         text-align: center;
+        width: 200px;
     }
 }
 

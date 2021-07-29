@@ -24,12 +24,5 @@ export default {
     this.getPodium()
   },
 
-  watch: {
-    podiumItens(){
-      console.log('wacthing podiumItens', podiumItens)
-    }
-
-  }
-
 }
 </script>

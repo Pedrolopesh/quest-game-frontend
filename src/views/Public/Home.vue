@@ -6,9 +6,9 @@
 
     <v-card class="p20 ac" max-width="800">
       <h1 class="alg-txt-c"> Bem vindo ao Quizzz</h1>
-      <div v-if="podiumItems" class="d-flex container-cup-podiums">
+      <div v-if="podiumItems" class="d-flex">
 
-        <PodiumComponent podiumItems=""/>
+        <PodiumComponent />
 
       </div>
 
