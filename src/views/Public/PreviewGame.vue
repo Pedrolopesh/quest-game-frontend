@@ -91,14 +91,16 @@ export default {
         if(!player.data || player.status != 201){
           this.$vs.notification({ duration: 9000, progress: 'auto', color:'success', title: 'Seu usuário foi encontrado, seja bem vindo de volta!',})
           localStorage.setItem('player', JSON.stringify(player.data));
-          this.requestPinCode()
-          this.confirmPinCode = true
+          this.$router.push('/SelectSubject')
+          // this.requestPinCode()
+          // this.confirmPinCode = true
         }
         else{
           localStorage.setItem('player', JSON.stringify(player.data));
           this.$vs.notification({ duration: 9000, progress: 'auto', color:'success', title: 'Sucesso ao cadastrar, Bem vindo Jogador: ' + player.data.nickname})
-          this.requestPinCode()
-          this.confirmPinCode = true
+          this.$router.push('/SelectSubject')
+          // this.requestPinCode()
+          // this.confirmPinCode = true
         }
 
     },
